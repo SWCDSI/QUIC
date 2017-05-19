@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements UltraphoneControl
     Boolean userHasPressed;
     TextView textResult;
 
+    boolean useRemoteMatlabModeInsteadOfStandaloneMode;
     boolean checkPressureInsteadOfSqueeze;
 
     @Override
@@ -30,11 +31,23 @@ public class MainActivity extends AppCompatActivity implements UltraphoneControl
 
         textResult = (TextView) findViewById(R.id.textResult);
 
-        checkPressureInsteadOfSqueeze = false; // switch to use different mode of aar lib
+        useRemoteMatlabModeInsteadOfStandaloneMode = true; // switch to use different mode of parsing
+        checkPressureInsteadOfSqueeze = true; // switch to use different mode of aar lib
+
+        if (useRemoteMatlabModeInsteadOfStandaloneMode) {
+            //control global variables to enable the remote mode
+            C.SERVER_ADDR = "10.0.0.229";
+            // NOTE: the following two flags must be mutual exclusive
+            C.TRACE_REALTIME_PROCESSING = false;
+            C.TRACE_SEND_TO_NETWORK = true;
+        }
 
         if (checkPressureInsteadOfSqueeze) uc = new UltraphoneController(D.DETECT_PSE, this, getApplicationContext());
-        else uc = new UltraphoneController(D.DETECT_SSE, this, getApplicationContext());
-
+        else {
+            uc = new UltraphoneController(D.DETECT_SSE, this, getApplicationContext());
+            uc.startCheckSqueezeWhenPossible(); // e.g., when the server is connected
+        }
+        
         ultraphoneHasStarted = false;
         pressureSensingIsReady = false;
         userHasPressed = false;
@@ -45,25 +58,6 @@ public class MainActivity extends AppCompatActivity implements UltraphoneControl
         super.onResume();
         uc.startEverything();
         ultraphoneHasStarted = true;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        pressureSensingIsReady = true;
-                        if (!checkPressureInsteadOfSqueeze) {
-                            uc.startCheckSqueezeRightNow();
-                        }
-                    }
-                });
-            }
-        }).start();
     }
 
     @Override
