@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements UltraphoneControl
             uc = new UltraphoneController(D.DETECT_SSE, this, getApplicationContext());
             uc.startCheckSqueezeWhenPossible(); // e.g., when the server is connected
         }
-        
+
         ultraphoneHasStarted = false;
         pressureSensingIsReady = false;
         userHasPressed = false;
