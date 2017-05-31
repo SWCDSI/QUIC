@@ -64,7 +64,7 @@ SHOW_ANIMATION = 1;
 
 NUM_RECORD_TO_UPDATE_ANIMATION = 4; % number of recorded in between animation updates
 % FIG_PEAK is the figure showing continuous change of peak of conPulse
-FIG_PEAK_X_LEN_TO_SHOW = 300; % 500 sweeps
+FIG_PEAK_X_LEN_TO_SHOW = 500; % 500 sweeps
 FIG_PEAK_LINE_TO_SHOW = 1:3; % index of first few correlation to show
 
 % FIG_FIX shows the convPulse value at fix places
