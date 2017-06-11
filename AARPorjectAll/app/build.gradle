@@ -1,0 +1,74 @@
+//apply plugin: 'com.android.application'
+
+// convert the project to a module for Samsung
+apply plugin: 'com.android.library'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'yctung'
+            keyPassword '895623'
+            storeFile file('/Users/eddyxd/Dropbox/WorkspacePartial/ProjectClosed/UMich/AndroidUMichKeyStore.jks')
+            storePassword '895623'
+        }
+    }
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
+    defaultConfig {
+        //applicationId "edu.umich.cse.audioanalysis"
+        minSdkVersion 17
+        // DONT Modify it to sdk version above 23, otherwise you need to get lots of fucking permission on run time
+        // ref: http://stackoverflow.com/questions/33139754/android-6-0-marshmallow-cannot-write-to-sd-card
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            moduleName = "detection"
+            //ref: http://stackoverflow.com/questions/29912960/how-to-use-native-opensl-es-in-android-studio
+            ldLibs "OpenSLES"       // Link with these libraries!
+            stl "stlport_shared"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/libs'
+        jni.srcDirs = []
+    }
+    task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
+        def ndkDir = android.ndkDirectory
+        commandLine "$ndkDir/ndk-build",
+                '-C', file('src/main/jni').absolutePath, // Change src/main/jni the relative path to your jni source
+                '-j', Runtime.runtime.availableProcessors(),
+                'all',
+                'NDK_DEBUG=1',
+                'TARGET_PLATFORM=android-9'
+    }
+    task cleanNative(type: Exec, description: 'Clean JNI object files') {
+        def ndkDir = android.ndkDirectory
+        commandLine "$ndkDir/ndk-build",
+                '-C', file('src/main/jni').absolutePath, // Change src/main/jni the relative path to your jni source
+                'clean'
+    }
+    // NOTE: I cancel the auto build script by Android Studio -> Need to manually build ndk
+    clean.dependsOn 'cleanNative'
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn buildNative
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-v4:23.0.0'
+    //compile 'com.android.support:support-v4:22:+'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile project(':usbserial-release')
+}

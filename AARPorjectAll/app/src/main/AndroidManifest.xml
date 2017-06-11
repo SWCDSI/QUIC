@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="edu.umich.cse.audioanalysis">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <uses-feature
+        android:name="android.hardware.usb.host"
+        android:required="true" />
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:icon="@drawable/forcephone_no_text"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".BumpFreeActivity"
+            android:label="@string/title_activity_bump_free"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VibrationMeasurementActivity"
+            android:label="@string/title_activity_bump_free"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NetworkingActivity"
+            android:label="@string/title_activity_networking"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UltraPhoneActivity"
+            android:label="@string/title_activity_networking"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.UltraphoneExpMainActivity"
+            android:label="ForcePhone"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpPressureMovingBallActivity"
+            android:label="@string/title_activity_exp_pressure_moving_ball"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpPressureMonitorActivity"
+            android:label="@string/title_activity_exp_pressure_monitor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpPressureHandTrainerActivity"
+            android:label="@string/title_activity_exp_pressure_hand_trainer"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BumpFree.ExpActivity.BumpfreeExpMainActivity"
+            android:label="@string/title_activity_bumpfree_exp_main"
+            android:screenOrientation="portrait">
+        </activity>
+
+
+        <activity
+            android:name=".BumpFree.ExpActivity.ExpObjectMonitorActivity"
+            android:label="@string/title_activity_exp_object_monitor"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
+
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpBatteryActivity"
+            android:label="@string/title_activity_exp_battery"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpSqueezeGoBackActivity"
+            android:label="@string/title_activity_exp_squeeze_go_back"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpSqueezeMonitorActivity"
+            android:label="@string/title_activity_exp_pressure_monitor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpPressureButtonActivity"
+            android:label="@string/title_activity_exp_pressure_button"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpPressureCorrectActivity"
+            android:label="@string/title_activity_exp_pressure_correct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpTouchCalibrationByExtSensorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpTouchCalibrationByScaleActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".UsbRelated.UsbService"
+            android:enabled="true" />
+
+        <activity
+            android:name=".UsbRelated.TestUsbActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UsbRelated.TestExtForceReaderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpRealtimeRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpPressureEngineSoundActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Ultraphone.ExpActivity.ExpServiceActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".Ultraphone.ForcePhoneService"
+            android:exported="true"></service>
+
+        <activity android:name=".EchoTag.ExpActivity.ExpSensingOnly"
+            android:screenOrientation="portrait">
+
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">AudioAnalysis</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_bump_free">BumpFreeActivity</string>
+    <string name="title_activity_networking">NetworkingActivity</string>
+    <string name="title_activity_ultraphone_exp_main">UltraphoneExpMainActivity</string>
+    <string name="title_activity_exp_pressure_moving_ball">ExpPressureMovingBallActivity</string>
+    <string name="title_activity_exp_pressure_monitor">ExpPressureMonitorActivity</string>
+    <string name="title_activity_exp_pressure_hand_trainer">ExpPressureHandTrainerActivity</string>
+    <string name="title_activity_bumpfree_exp_main">BumpfreeExpMainActivity</string>
+    <string name="title_activity_exp_object_monitor">ExpObjectMonitorActivity</string>
+    <string name="title_activity_exp_battery">ExpBatteryActivity</string>
+    <string name="title_activity_exp_squeeze_go_back">ExpSqueezeGoBackActivity</string>
+    <string name="title_activity_exp_pressure_button">ExpPressureButton</string>
+    <string name="title_activity_exp_pressure_correct">ExpPressureCorrectActivity</string>
+</resources>
