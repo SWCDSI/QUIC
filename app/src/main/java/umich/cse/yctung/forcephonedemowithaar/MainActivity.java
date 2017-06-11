@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.umich.cse.audioanalysis.C;
 import edu.umich.cse.audioanalysis.D;
 import edu.umich.cse.audioanalysis.Ultraphone.ExpActivity.UltraphoneController;
+import edu.umich.cse.audioanalysis.Ultraphone.Graphic.MonitorView;
 import edu.umich.cse.audioanalysis.Ultraphone.UltraphoneControllerListener;
 
 public class MainActivity extends AppCompatActivity implements UltraphoneControllerListener {
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements UltraphoneControl
     Boolean pressureSensingIsReady;
     Boolean userHasPressed;
     TextView textResult;
+    MonitorView monitorView;
 
     boolean useRemoteMatlabModeInsteadOfStandaloneMode;
     boolean checkPressureInsteadOfSqueeze;
@@ -31,7 +34,11 @@ public class MainActivity extends AppCompatActivity implements UltraphoneControl
 
         textResult = (TextView) findViewById(R.id.textResult);
 
-        useRemoteMatlabModeInsteadOfStandaloneMode = true; // switch to use different mode of parsing
+        monitorView = (MonitorView) findViewById(edu.umich.cse.audioanalysis.R.id.viewMonitor);
+        monitorView.showLines(2,0,200,0,1);
+        RelativeLayout mainLayout;
+
+        useRemoteMatlabModeInsteadOfStandaloneMode = false; // switch to use different mode of parsing
         checkPressureInsteadOfSqueeze = true; // switch to use different mode of aar lib
 
         if (useRemoteMatlabModeInsteadOfStandaloneMode) {
@@ -106,6 +113,9 @@ public class MainActivity extends AppCompatActivity implements UltraphoneControl
             @Override
             public void run() {
                 textResult.setText(String.format("pressure = %.2f", v));
+                monitorView.addPoint(0, v);
+                //monitorView.addPoint(1, pressureCalibed);
+                monitorView.invalidate();
             }
         });
     }
